@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DoubleU | Official Music, Albums, and Artist Website</title>
+    <title>DoubleU | Official Artist Website</title>
 
     <style>
         :root {
-            --bg-color: #0a0a0a;
+            --bg-color: #050505;
             --text-color: #f5f5f7;
             --accent-main: #007bff; 
-            --card-bg: rgba(22, 22, 22, 0.9); 
-            --nav-bg: rgba(10, 10, 10, 0.5);
+            --card-bg: rgba(20, 20, 20, 0.7); 
             --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
@@ -19,11 +18,13 @@
 
         body {
             font-family: var(--font-stack);
-            background: linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.7)), url('home-background.png');
-            background-size: cover;
-            background-position: center;
+            background-color: var(--bg-color);
+            background-image: 
+                linear-gradient(342deg, #000 0%, transparent 10%),
+                linear-gradient(162deg, #000 0%, transparent 10%),
+                radial-gradient(at 50% 50%, #111 0, #050505 100%);
+            background-size: 4px 4px, 4px 4px, 100% 100%;
             background-attachment: fixed;
-            background-repeat: no-repeat;
             color: var(--text-color);
             line-height: 1.6;
             overflow-x: hidden;
@@ -32,7 +33,7 @@
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         .container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
-        /* --- HERO SECTION --- */
+        /* --- HERO --- */
         .hero { padding: 150px 0 20px; text-align: center; }
         .artist-name {
             font-size: clamp(3.5rem, 12vw, 7rem); font-weight: 900;
@@ -41,61 +42,72 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .subtitle { font-size: 1.1rem; opacity: 0.5; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 30px; }
+        .subtitle { font-size: 1rem; opacity: 0.4; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 30px; }
 
         /* --- NAV --- */
-        nav { width: 100%; padding: 20px 0; margin-bottom: 100px; text-align: center; }
-        .nav-content { display: flex; flex-direction: column; align-items: center; gap: 20px; }
-        .nav-links { display: flex; justify-content: center; flex-wrap: wrap; }
-        .nav-links a { margin: 0 15px; font-size: 0.9rem; opacity: 0.7; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        nav { width: 100%; padding: 20px 0; margin-bottom: 80px; text-align: center; }
+        .nav-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; }
+        .nav-links a { font-size: 0.85rem; opacity: 0.6; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
         .nav-links a:hover { opacity: 1; color: var(--accent-main); }
 
-        /* --- CONTENT BLOCKS --- */
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1); }
+        /* --- REVEAL ANIMATION --- */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.2, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        section { margin-bottom: 120px; }
-        .section-title { font-size: 1.8rem; margin-bottom: 40px; text-transform: uppercase; letter-spacing: 1px; }
-
-        .release-card {
-            display: flex; background: var(--card-bg); border-radius: 24px;
-            overflow: hidden; border: 1px solid #222; align-items: center;
-            backdrop-filter: blur(10px);
+        /* --- GLASS CARDS --- */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+            transition: 0.4s ease;
         }
-        .release-cover { flex: 1; max-width: 500px; aspect-ratio: 1/1; }
-        .release-cover img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* --- LATEST RELEASE --- */
+        .release-card { display: flex; overflow: hidden; align-items: center; margin-bottom: 120px; }
+        .release-cover { flex: 1; max-width: 500px; overflow: hidden; }
+        .release-cover img { 
+            width: 100%; height: 100%; object-fit: cover; 
+            transition: transform 0.6s cubic-bezier(0.33, 1, 0.68, 1);
+        }
+        .release-card:hover .release-cover img { transform: scale(1.08); }
         .release-info { flex: 1.2; padding: 60px; }
-        
-        .label { color: var(--accent-main); font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; display: block; }
-        .album-title { font-size: 3.5rem; line-height: 1; margin-bottom: 20px; }
-        
+        .label { color: var(--accent-main); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 10px; display: block; }
+        .album-title { font-size: 4rem; line-height: 1; margin-bottom: 20px; }
         .btn-primary {
             display: inline-block; padding: 16px 45px; background: var(--accent-main);
             color: white; border-radius: 50px; font-weight: 700; border: none; cursor: pointer;
         }
 
-        .tracks-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; }
-        .track-item {
-            background: var(--card-bg); padding: 22px; border-radius: 12px;
-            display: flex; align-items: center; border: 1px solid #222; transition: 0.3s;
-            backdrop-filter: blur(10px);
+        /* --- DISCOGRAPHY GRID --- */
+        .disco-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            margin-bottom: 120px;
         }
-        .track-item:hover { border-color: var(--accent-main); transform: translateX(8px); background: #1c1c1c; }
-        .track-num { font-weight: 900; opacity: 0.2; margin-right: 20px; }
+        .disco-item { padding: 15px; text-align: center; }
+        .disco-item img { width: 100%; border-radius: 12px; margin-bottom: 15px; }
 
-        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+        /* --- TRACK LIST --- */
+        .tracks-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-bottom: 120px; }
+        .track-item { padding: 22px; display: flex; align-items: center; }
+        .track-num { font-weight: 900; opacity: 0.2; margin-right: 20px; font-size: 1.5rem; }
+
+        /* --- CONTACT --- */
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; padding: 60px; }
         input, textarea {
-            width: 100%; padding: 18px; background: #1a1a1a; border: 1px solid #333;
-            border-radius: 10px; color: white; margin-bottom: 15px; outline: none;
+            width: 100%; padding: 18px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px; color: white; margin-bottom: 15px; outline: none;
         }
-        input:focus, textarea:focus { border-color: var(--accent-main); }
 
-        footer { padding: 100px 0; border-top: 1px solid #222; text-align: center; opacity: 0.4; font-size: 0.8rem; }
+        footer { padding: 100px 0; text-align: center; opacity: 0.3; font-size: 0.8rem; letter-spacing: 1px; }
 
         @media (max-width: 850px) {
             .release-card, .contact-grid { flex-direction: column; display: block; }
             .release-info { padding: 40px 25px; text-align: center; }
-            .hero { padding: 100px 0 20px; }
         }
     </style>
 </head>
@@ -105,114 +117,124 @@
         <h1 class="artist-name">DoubleU</h1>
         <p class="subtitle">Official Artist Website</p>
         
-        <nav id="navbar">
-            <div class="nav-content">
-                <div class="nav-links">
-                    <a href="#music">Music</a>
-                    <a href="https://www.youtube.com/@DoubleUOTB/featured" target="_blank">YouTube</a>
-                    <a href="https://artists.spotify.com/c/artist/78gVqbaxxYAd9aLEZJ49YG" target="_blank">Spotify</a>
-                    <a href="https://artists.apple.com/ui/profile/artist/ami:identity:45917dc7f16e466e868bebaf98ae66d8" target="_blank">Apple Music</a>
-                    <a href="#contact">Contact</a>
-                </div>
+        <nav>
+            <div class="nav-links">
+                <a href="#music">Music</a>
+                <a href="#discography">Discography</a>
+                <a href="https://music.apple.com/us/artist/doubleu/1586705800" target="_blank">Apple Music</a>
+                <a href="#contact">Contact</a>
             </div>
         </nav>
     </header>
 
     <main class="container">
         <section id="music">
-            <div class="release-card reveal">
+            <div class="glass-card release-card reveal">
                 <div class="release-cover">
-                    <img src="IMG_0081.PNG" alt="Faded 405 album cover">
+                    <img src="IMG_0081.PNG" alt="Faded 405">
                 </div>
                 <div class="release-info">
                     <span class="label">Latest Release</span>
                     <h2 class="album-title">Faded 405</h2>
-                    <p style="margin-bottom: 30px; opacity: 0.7;">The 2026 album capturing the pulse of the highway and the glow of the city.</p>
-                    <a href="https://www.youtube.com/playlist?list=OLAK5uy_n3aFNgsim21cn86Zug0CJU1A4OoiZsyIM" class="btn-primary" target="_blank">Listen Now</a>
+                    <p style="margin-bottom: 30px; opacity: 0.7;">The definitive 2026 album capturing the pulse of the highway. Featuring "Zero Sum" and "Shadow Boxer".</p>
+                    <a href="https://music.apple.com/us/album/faded-405/1741399707" class="btn-primary" target="_blank">Listen Now</a>
                 </div>
             </div>
         </section>
 
         <section>
-            <h2 class="section-title">Essential Tracks</h2>
+            <h2 style="margin-bottom: 40px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8;">Popular Tracks</h2>
             <div class="tracks-grid">
-                <div class="track-item reveal"><span class="track-num">01</span> Shadow Work</div>
-                <div class="track-item reveal"><span class="track-num">02</span> Velocity</div>
-                <div class="track-item reveal"><span class="track-num">03</span> Midnight Echo</div>
-                <div class="track-item reveal"><span class="track-num">04</span> Static Dreams</div>
-                <div class="track-item reveal"><span class="track-num">05</span> Ghost Theory</div>
-                <div class="track-item reveal"><span class="track-num">06</span> Undercurrent</div>
+                <div class="glass-card track-item reveal"><span class="track-num">01</span> Zero Sum</div>
+                <div class="glass-card track-item reveal"><span class="track-num">02</span> Shadow Boxer</div>
+                <div class="glass-card track-item reveal"><span class="track-num">03</span> Found you in the RainFall</div>
+                <div class="glass-card track-item reveal"><span class="track-num">04</span> Ain't New To Me</div>
+                <div class="glass-card track-item reveal"><span class="track-num">05</span> Closer than cloer</div>
+                <div class="glass-card track-item reveal"><span class="track-num">06</span> Fading Out</div>
             </div>
         </section>
 
-        <section class="reveal">
-            <h2 class="section-title">Discography</h2>
-            <div class="tracks-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
-                <div class="track-item" style="flex-direction: column; text-align: center;">
-                    <img src="IMG_0081.PNG" style="width: 100%; border-radius: 8px; margin-bottom: 15px;" alt="Faded 405">
-                    <strong>Faded 405</strong>
-                    <span style="font-size: 0.8rem; opacity: 0.5;">Album • 2026</span>
+        <section id="discography">
+            <h2 style="margin-bottom: 40px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8;">Full Discography</h2>
+            <div class="disco-grid">
+                <div class="glass-card disco-item reveal">
+                    <img src="IMG_0081.PNG" alt="Faded 405">
+                    <h3>Faded 405</h3>
+                    <p>Album • 2026</p>
+                </div>
+                <div class="glass-card disco-item reveal">
+                    <img src="https://via.placeholder.com/400/111/fff?text=Zero+Sum" alt="Zero Sum">
+                    <h3>Zero Sum</h3>
+                    <p>Single • 2026</p>
+                </div>
+                <div class="glass-card disco-item reveal">
+                    <img src="https://via.placeholder.com/400/111/fff?text=Found+You" alt="Rainfall">
+                    <h3>Found you in the RainFall</h3>
+                    <p>Single • 2025</p>
+                </div>
+                <div class="glass-card disco-item reveal">
+                    <img src="https://via.placeholder.com/400/111/fff?text=Ain't+New" alt="Ain't New">
+                    <h3>Ain't New To Me</h3>
+                    <p>Single • 2023</p>
+                </div>
+                <div class="glass-card disco-item reveal">
+                    <img src="https://via.placeholder.com/400/111/fff?text=Closer" alt="Closer">
+                    <h3>Closer than cloer</h3>
+                    <p>Single • 2023</p>
+                </div>
+                <div class="glass-card disco-item reveal">
+                    <img src="https://via.placeholder.com/400/111/fff?text=Fresh" alt="Fresh">
+                    <h3>Fresh</h3>
+                    <p>Single • 2022</p>
+                </div>
+                <div class="glass-card disco-item reveal">
+                    <img src="https://via.placeholder.com/400/111/fff?text=Pakkage+Deal" alt="Pakkage Deal">
+                    <h3>Pakkage Deal</h3>
+                    <p>Single • 2022</p>
+                </div>
+                <div class="glass-card disco-item reveal">
+                    <img src="https://via.placeholder.com/400/111/fff?text=Trauma" alt="Trauma">
+                    <h3>Real Life Trauma</h3>
+                    <p>Single • 2021</p>
                 </div>
             </div>
         </section>
 
-        <section id="contact">
-            <div class="contact-grid reveal">
+        <section id="contact" class="glass-card contact-section reveal">
+            <div class="contact-grid">
                 <div>
                     <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Contact</h2>
-                    <p style="opacity: 0.6;">Booking & Press inquiries.</p>
-                    <p style="margin-top: 20px; color: var(--accent-main); font-weight: bold;">mgmt@doubleumusic.com</p>
+                    <p style="opacity: 0.6; margin-bottom: 20px;">Inquiries regarding DoubleU.</p>
+                    <p style="color: var(--accent-main); font-weight: bold;">mgmt@doubleumusic.com</p>
                 </div>
                 <form id="contact-form">
                     <input type="text" placeholder="Name" required>
                     <input type="email" placeholder="Email" required>
                     <textarea placeholder="Message" style="height: 120px;" required></textarea>
-                    <button type="submit" class="btn-primary" style="width: 100%;">Send</button>
+                    <button type="submit" class="btn-primary" style="width: 100%;">Send Message</button>
                 </form>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>© 2026 DoubleU. Designed for the sound of tomorrow.</p>
+        <p>© 2026 DOUBLEU. ALL RIGHTS RESERVED.</p>
     </footer>
 
     <script>
-        // SCROLL REVEAL LOGIC
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: "0px 0px -50px 0px"
-        };
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('active');
             });
-        }, observerOptions);
+        }, { threshold: 0.1 });
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // SMOOTH SCROLLING FOR NAV LINKS
-        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                const targetId = this.getAttribute('href');
-                if (targetId.startsWith('#')) {
-                    e.preventDefault();
-                    const target = document.querySelector(targetId);
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth' });
-                    }
-                }
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
             });
-        });
-
-        // FORM SUBMISSION
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert("Message sent! DoubleU management will get back to you soon.");
-            this.reset();
         });
     </script>
 </body>
