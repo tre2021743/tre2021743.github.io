@@ -80,11 +80,16 @@
 
         .container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
-        nav {
-            position: fixed; top: 0; width: 100%; z-index: 1000;
-            padding: 20px 0; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(20px);
-        }
+      nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 20px 0;
+    backdrop-filter: blur(20px);
+}
+
+
         nav.scrolled { background: var(--nav-bg); padding: 15px 0; border-bottom: 1px solid #222; }
         .nav-content { display: flex; justify-content: space-between; align-items: center; }
         .logo { font-weight: 900; letter-spacing: -1px; font-size: 1.2rem; }
@@ -146,23 +151,23 @@
 
 <body>
 
-    <nav id="navbar">
-        <div class="container nav-content">
-            <div class="logo">DOUBLEU</div>
-            <div class="nav-links">
-                <a href="#music">Music</a>
-                <a href="https://www.youtube.com/@DoubleUOTB/featured" target="_blank">YouTube</a>
-                <a href="https://artists.spotify.com/c/artist/78gVqbaxxYAd9aLEZJ49YG" target="_blank">Spotify</a>
-                <a href="https://artists.apple.com/ui/profile/artist/ami:identity:45917dc7f16e466e868bebaf98ae66d8" target="_blank">Apple Music</a>
-                <a href="#contact">Contact</a>
-            </div>
-        </div>
-    </nav>
+   <header class="hero container">
+    <h1 class="artist-name">DoubleU</h1>
+    <p class="subtitle">Official Artist Website</p>
+</header>
 
-    <header class="hero container">
-        <h1 class="artist-name">DoubleU</h1>
-        <p class="subtitle">Official Artist Website</p>
-    </header>
+<nav id="navbar">
+    <div class="container nav-content">
+        <div class="logo">DOUBLEU</div>
+        <div class="nav-links">
+            <a href="#music">Music</a>
+            <a href="https://www.youtube.com/@DoubleUOTB/featured" target="_blank">YouTube</a>
+            <a href="https://artists.spotify.com/c/artist/78gVqbaxxYAd9aLEZJ49YG" target="_blank">Spotify</a>
+            <a href="https://artists.apple.com/ui/profile/artist/ami:identity:45917dc7f16e466e868bebaf98ae66d8" target="_blank">Apple Music</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </div>
+</nav>
 
     <main class="container">
         
