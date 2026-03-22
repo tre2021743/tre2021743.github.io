@@ -3,99 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>DoubleU | Official Music, Albums, and Artist Website</title>
 
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="DoubleU — genre‑bending artist blending atmospheric soundscapes with modern electronic energy. Listen to Faded 405, explore essential tracks, and contact for booking & press.">
-    <meta name="keywords" content="DoubleU, DoubleU artist, Faded 405, electronic music, indie electronic, producer, artist website, new album 2026">
-    <meta name="author" content="DoubleU">
-    <meta name="robots" content="index, follow">
-
-    <!-- Open Graph (Social Sharing) -->
-    <meta property="og:title" content="DoubleU — Official Artist Website">
-    <meta property="og:description" content="Listen to Faded 405 and explore essential tracks from DoubleU.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&fit=crop&w=800&q=80">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://tre2021743.github.io/">
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="DoubleU — Official Artist Website">
-    <meta name="twitter:description" content="Listen to Faded 405 and explore essential tracks from DoubleU.">
-    <meta name="twitter:image" content="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&fit=crop&w=800&q=80">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-
-    <!-- Structured Data (Google Knowledge Panel Boost) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "MusicGroup",
-      "name": "DoubleU",
-      "url": "https://tre2021743.github.io/",
-      "image": "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&fit=crop&w=800&q=80",
-      "genre": "Electronic",
-      "description": "DoubleU is a 2026 electronic artist blending atmospheric soundscapes with modern production.",
-      "album": {
-        "@type": "MusicAlbum",
-        "name": "Faded 405",
-        "datePublished": "2026"
-      },
-      "sameAs": [
-        "https://www.youtube.com/@DoubleUOTB/featured",
-        "https://artists.spotify.com/c/artist/78gVqbaxxYAd9aLEZJ49YG",
-        "https://artists.apple.com/ui/profile/artist/ami:identity:45917dc7f16e466e868bebaf98ae66d8"
-      ]
-    }
-    </script>
-
+    <meta name="description" content="DoubleU — genre‑bending artist blending atmospheric soundscapes with modern electronic energy.">
+    
     <style>
         :root {
-        /* Keep existing variables, but we'll modify the bg usage */
-        --bg-color: #0a0a0a;
-        --text-color: #f5f5f7;
-        --accent-main: #007bff; 
-        --card-bg: rgba(22, 22, 22, 0.9); /* Added transparency for glass effect */
-        --nav-bg: rgba(10, 10, 10, 0.8);
-        --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    }
+            --bg-color: #0a0a0a;
+            --text-color: #f5f5f7;
+            --accent-main: #007bff; 
+            --card-bg: rgba(22, 22, 22, 0.9); 
+            --nav-bg: rgba(10, 10, 10, 0.8);
+            --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
 
-    body {
-        font-family: var(--font-stack);
-        /* Set the background image here */
-        background: 
-            linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.7)), 
-            url('home-background.png');
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed; /* Keeps image still while scrolling */
-        background-repeat: no-repeat;
-        color: var(--text-color);
-        line-height: 1.6;
-        overflow-x: hidden;
-    }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-stack);
+            background: linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.7)), url('IMG_0082 1.PNG');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
         a { text-decoration: none; color: inherit; transition: 0.3s; }
 
-        .container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 20px; 
-                    
-                    nav {
-        position: fixed;
-            top: 260px;   /* adjust this number to sit perfectly under the subtitle */
+        .container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+        /* --- FIXED NAV STYLES --- */
+        nav {
+            position: fixed;
+            top: 0;
             width: 100%;
             z-index: 1000;
             padding: 20px 0;
+            transition: 0.4s;
             backdrop-filter: blur(20px);
         }
 
+        nav.scrolled { 
+            background: var(--nav-bg); 
+            padding: 15px 0; 
+            border-bottom: 1px solid #222; 
+        }
 
-        nav.scrolled { background: var(--nav-bg); padding: 15px 0; border-bottom: 1px solid #222; }
         .nav-content { display: flex; justify-content: space-between; align-items: center; }
         .logo { font-weight: 900; letter-spacing: -1px; font-size: 1.2rem; }
         .nav-links a { margin-left: 30px; font-size: 0.9rem; opacity: 0.7; font-weight: 500; }
         .nav-links a:hover { opacity: 1; color: var(--accent-main); }
 
+        /* --- HERO & CONTENT --- */
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
@@ -116,7 +78,7 @@
             display: flex; background: var(--card-bg); border-radius: 24px;
             overflow: hidden; border: 1px solid #222; align-items: center;
         }
-        .release-cover { flex: 1; max-width: 500px; aspect-ratio: 1/1; background: #222; }
+        .release-cover { flex: 1; max-width: 500px; aspect-ratio: 1/1; }
         .release-cover img { width: 100%; height: 100%; object-fit: cover; }
         .release-info { flex: 1.2; padding: 60px; }
         .label { color: var(--accent-main); font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; display: block; }
@@ -129,7 +91,7 @@
         .tracks-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; }
         .track-item {
             background: var(--card-bg); padding: 22px; border-radius: 12px;
-            display: flex; align-items: center; border: 1px solid #222;
+            display: flex; align-items: center; border: 1px solid #222; transition: 0.3s;
         }
         .track-item:hover { border-color: var(--accent-main); transform: translateX(8px); background: #1c1c1c; }
         .track-num { font-weight: 900; opacity: 0.2; margin-right: 20px; }
@@ -148,33 +110,31 @@
         }
     </style>
 </head>
-
 <body>
 
-   <header class="hero container">
-    <h1 class="artist-name">DoubleU</h1>
-    <p class="subtitle">Official Artist Website</p>
-</header>
-
-<nav id="navbar">
-    <div class="container nav-content">
-        <div class="logo">DOUBLEU</div>
-        <div class="nav-links">
-            <a href="#music">Music</a>
-            <a href="https://www.youtube.com/@DoubleUOTB/featured" target="_blank">YouTube</a>
-            <a href="https://artists.spotify.com/c/artist/78gVqbaxxYAd9aLEZJ49YG" target="_blank">Spotify</a>
-            <a href="https://artists.apple.com/ui/profile/artist/ami:identity:45917dc7f16e466e868bebaf98ae66d8" target="_blank">Apple Music</a>
-            <a href="#contact">Contact</a>
+    <nav id="navbar">
+        <div class="container nav-content">
+            <div class="logo">DOUBLEU</div>
+            <div class="nav-links">
+                <a href="#music">Music</a>
+                <a href="https://www.youtube.com/@DoubleUOTB/featured" target="_blank">YouTube</a>
+                <a href="https://artists.spotify.com/c/artist/78gVqbaxxYAd9aLEZJ49YG" target="_blank">Spotify</a>
+                <a href="https://artists.apple.com/ui/profile/artist/ami:identity:45917dc7f16e466e868bebaf98ae66d8" target="_blank">Apple Music</a>
+                <a href="#contact">Contact</a>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
+
+    <header class="hero container">
+        <h1 class="artist-name">DoubleU</h1>
+        <p class="subtitle">Official Artist Website</p>
+    </header>
 
     <main class="container">
-        
         <section id="music">
             <div class="release-card reveal">
                 <div class="release-cover">
-                    <img src="IMG_0081.PNG" alt="Faded 405 album cover by DoubleU">
+                    <img src="IMG_0081.PNG" alt="Faded 405 album cover">
                 </div>
                 <div class="release-info">
                     <span class="label">Latest Release</span>
@@ -242,7 +202,5 @@
             observer.observe(el);
         });
     </script>
-
 </body>
-</html>
 </html>
