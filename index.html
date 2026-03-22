@@ -43,33 +43,11 @@
         }
         .subtitle { font-size: 1.1rem; opacity: 0.5; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 30px; }
 
-        /* --- UPDATED NAV: PLACED UNDER SUBTITLE --- */
-        nav {
-            width: 100%;
-            padding: 20px 0;
-            margin-bottom: 100px; /* Space before the content starts */
-            text-align: center;
-        }
-
-        .nav-content { 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            gap: 20px; 
-        }
-
-        /* Hide the logo in the nav since the big Hero title is right above it */
-        .nav-logo { display: none; }
-
+        /* --- NAV --- */
+        nav { width: 100%; padding: 20px 0; margin-bottom: 100px; text-align: center; }
+        .nav-content { display: flex; flex-direction: column; align-items: center; gap: 20px; }
         .nav-links { display: flex; justify-content: center; flex-wrap: wrap; }
-        .nav-links a { 
-            margin: 0 15px; 
-            font-size: 0.9rem; 
-            opacity: 0.7; 
-            font-weight: 600; 
-            text-transform: uppercase; 
-            letter-spacing: 1px;
-        }
+        .nav-links a { margin: 0 15px; font-size: 0.9rem; opacity: 0.7; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
         .nav-links a:hover { opacity: 1; color: var(--accent-main); }
 
         /* --- CONTENT BLOCKS --- */
@@ -82,6 +60,7 @@
         .release-card {
             display: flex; background: var(--card-bg); border-radius: 24px;
             overflow: hidden; border: 1px solid #222; align-items: center;
+            backdrop-filter: blur(10px);
         }
         .release-cover { flex: 1; max-width: 500px; aspect-ratio: 1/1; }
         .release-cover img { width: 100%; height: 100%; object-fit: cover; }
@@ -99,6 +78,7 @@
         .track-item {
             background: var(--card-bg); padding: 22px; border-radius: 12px;
             display: flex; align-items: center; border: 1px solid #222; transition: 0.3s;
+            backdrop-filter: blur(10px);
         }
         .track-item:hover { border-color: var(--accent-main); transform: translateX(8px); background: #1c1c1c; }
         .track-num { font-weight: 900; opacity: 0.2; margin-right: 20px; }
@@ -106,13 +86,16 @@
         .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
         input, textarea {
             width: 100%; padding: 18px; background: #1a1a1a; border: 1px solid #333;
-            border-radius: 10px; color: white; margin-bottom: 15px;
+            border-radius: 10px; color: white; margin-bottom: 15px; outline: none;
         }
-        footer { padding: 100px 0; border-top: 1px solid #222; text-align: center; opacity: 0.4; }
+        input:focus, textarea:focus { border-color: var(--accent-main); }
+
+        footer { padding: 100px 0; border-top: 1px solid #222; text-align: center; opacity: 0.4; font-size: 0.8rem; }
 
         @media (max-width: 850px) {
             .release-card, .contact-grid { flex-direction: column; display: block; }
             .release-info { padding: 40px 25px; text-align: center; }
+            .hero { padding: 100px 0 20px; }
         }
     </style>
 </head>
@@ -162,17 +145,28 @@
             </div>
         </section>
 
+        <section class="reveal">
+            <h2 class="section-title">Discography</h2>
+            <div class="tracks-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                <div class="track-item" style="flex-direction: column; text-align: center;">
+                    <img src="IMG_0081.PNG" style="width: 100%; border-radius: 8px; margin-bottom: 15px;" alt="Faded 405">
+                    <strong>Faded 405</strong>
+                    <span style="font-size: 0.8rem; opacity: 0.5;">Album • 2026</span>
+                </div>
+            </div>
+        </section>
+
         <section id="contact">
             <div class="contact-grid reveal">
                 <div>
                     <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Contact</h2>
                     <p style="opacity: 0.6;">Booking & Press inquiries.</p>
-                    <p style="margin-top: 20px; color: var(--accent-main);">mgmt@doubleumusic.com</p>
+                    <p style="margin-top: 20px; color: var(--accent-main); font-weight: bold;">mgmt@doubleumusic.com</p>
                 </div>
-                <form>
-                    <input type="text" placeholder="Name">
-                    <input type="email" placeholder="Email">
-                    <textarea placeholder="Message" style="height: 120px;"></textarea>
+                <form id="contact-form">
+                    <input type="text" placeholder="Name" required>
+                    <input type="email" placeholder="Email" required>
+                    <textarea placeholder="Message" style="height: 120px;" required></textarea>
                     <button type="submit" class="btn-primary" style="width: 100%;">Send</button>
                 </form>
             </div>
@@ -184,4 +178,42 @@
     </footer>
 
     <script>
-        const observerOptions
+        // SCROLL REVEAL LOGIC
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // SMOOTH SCROLLING FOR NAV LINKS
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+
+        // FORM SUBMISSION
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert("Message sent! DoubleU management will get back to you soon.");
+            this.reset();
+        });
+    </script>
+</body>
+</html>
