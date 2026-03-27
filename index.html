@@ -14,7 +14,13 @@
             --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* --- CUSTOM SCROLLBAR --- */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-main); }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scrollbar-width: thin; scrollbar-color: #333 #050505; }
 
         body {
             font-family: var(--font-stack);
@@ -34,7 +40,7 @@
         .container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
         /* --- HERO --- */
-        .hero { padding: 150px 0 20px; text-align: center; }
+        .hero { padding: 120px 0 20px; text-align: center; }
         .artist-name {
             font-size: clamp(3.5rem, 12vw, 7rem); font-weight: 900;
             text-transform: uppercase; letter-spacing: -5px;
@@ -45,13 +51,13 @@
         .subtitle { font-size: 1rem; opacity: 0.4; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 30px; }
 
         /* --- NAV --- */
-        nav { width: 100%; padding: 20px 0; margin-bottom: 80px; text-align: center; }
+        nav { width: 100%; padding: 20px 0; margin-bottom: 60px; text-align: center; }
         .nav-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; }
         .nav-links a { font-size: 0.85rem; opacity: 0.6; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
         .nav-links a:hover { opacity: 1; color: var(--accent-main); }
 
         /* --- REVEAL ANIMATION --- */
-        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.2, 1, 0.3, 1); }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         /* --- GLASS CARDS --- */
@@ -63,25 +69,25 @@
             border-radius: 24px;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
             transition: 0.4s ease;
+            position: relative;
         }
+        .glass-card:hover { transform: translateY(-5px); border-color: rgba(255, 255, 255, 0.2); }
 
-        /* --- LATEST RELEASE --- */
+        /* --- SECTIONS --- */
         .release-card { display: flex; overflow: hidden; align-items: center; margin-bottom: 120px; }
         .release-cover { flex: 1; max-width: 500px; overflow: hidden; }
-        .release-cover img { 
-            width: 100%; height: 100%; object-fit: cover; 
-            transition: transform 0.6s cubic-bezier(0.33, 1, 0.68, 1);
-        }
-        .release-card:hover .release-cover img { transform: scale(1.08); }
+        .release-cover img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s cubic-bezier(0.33, 1, 0.68, 1); }
+        .release-card:hover .release-cover img { transform: scale(1.05); }
         .release-info { flex: 1.2; padding: 60px; }
+
         .label { color: var(--accent-main); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 10px; display: block; }
-        .album-title { font-size: 4rem; line-height: 1; margin-bottom: 20px; }
         .btn-primary {
             display: inline-block; padding: 16px 45px; background: var(--accent-main);
-            color: white; border-radius: 50px; font-weight: 700; border: none; cursor: pointer;
+            color: white; border-radius: 50px; font-weight: 700; border: none; cursor: pointer; transition: 0.3s;
         }
+        .btn-primary:hover { background: #0056b3; transform: scale(1.02); }
 
-        /* --- DISCOGRAPHY GRID --- */
+        /* --- DISCOGRAPHY --- */
         .disco-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -100,14 +106,16 @@
         .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; padding: 60px; }
         input, textarea {
             width: 100%; padding: 18px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px; color: white; margin-bottom: 15px; outline: none;
+            border-radius: 12px; color: white; margin-bottom: 15px; outline: none; font-family: inherit;
         }
 
-        footer { padding: 100px 0; text-align: center; opacity: 0.3; font-size: 0.8rem; letter-spacing: 1px; }
+        footer { padding: 80px 0; text-align: center; opacity: 0.3; font-size: 0.8rem; letter-spacing: 1px; }
 
         @media (max-width: 850px) {
             .release-card, .contact-grid { flex-direction: column; display: block; }
             .release-info { padding: 40px 25px; text-align: center; }
+            .about-flex { flex-direction: column; }
+            .about-image { height: 300px !important; }
         }
     </style>
 </head>
@@ -120,6 +128,7 @@
         <nav>
             <div class="nav-links">
                 <a href="#music">Music</a>
+                <a href="#about">About</a>
                 <a href="#discography">Discography</a>
                 <a href="https://music.apple.com/us/artist/doubleu/1586705800" target="_blank">Apple Music</a>
                 <a href="#contact">Contact</a>
@@ -135,9 +144,29 @@
                 </div>
                 <div class="release-info">
                     <span class="label">Latest Release</span>
-                    <h2 class="album-title">Faded 405</h2>
+                    <h2 style="font-size: 4rem; line-height: 1; margin-bottom: 20px;">Faded 405</h2>
                     <p style="margin-bottom: 30px; opacity: 0.7;">The definitive 2026 album capturing the pulse of the highway. Featuring "Zero Sum" and "Shadow Boxer".</p>
                     <a href="https://music.apple.com/us/album/faded-405/1741399707" class="btn-primary" target="_blank">Listen Now</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="reveal" style="margin-bottom: 120px;">
+            <div class="glass-card about-flex" style="display: flex; flex-wrap: wrap; overflow: hidden; align-items: center;">
+                <div style="flex: 1; min-width: 300px; padding: 60px;">
+                    <span class="label">The Story</span>
+                    <h2 style="font-size: 3rem; line-height: 1.1; margin-bottom: 25px;">DoubleU</h2>
+                    <p style="opacity: 0.8; font-size: 1.1rem; margin-bottom: 20px;">
+                        Born from the neon-soaked transit of the 405, DoubleU creates the soundtrack for the drive home. 
+                        His sound is a collision of atmospheric synths and raw, percussive energy.
+                    </p>
+                    <p style="opacity: 0.6; line-height: 1.8;">
+                        Following the breakout success of <em>Real Life Trauma</em>, the 2026 LP <strong>Faded 405</strong> 
+                        marks a definitive shift. It is an immersive exploration of motion and memory, built for 
+                        those who find clarity in the blur of the fast lane.
+                    </p>
+                </div>
+                <div class="about-image" style="flex: 1; min-width: 300px; height: 500px; background: url('https://images.unsplash.com/photo-1518156677180-95a2893f3e9f?q=80&w=1000&auto=format&fit=crop') center/cover no-repeat; filter: grayscale(1) contrast(1.2);">
                 </div>
             </div>
         </section>
@@ -150,12 +179,12 @@
                 <div class="glass-card track-item reveal"><span class="track-num">03</span> Found you in the RainFall</div>
                 <div class="glass-card track-item reveal"><span class="track-num">04</span> Ain't New To Me</div>
                 <div class="glass-card track-item reveal"><span class="track-num">05</span> Closer than cloer</div>
-                <div class="glass-card track-item reveal"><span class="track-num">06</span> Fading Out</div>
+                <div class="glass-card track-item reveal"><span class="track-num">06</span> Two of Us</div>
             </div>
         </section>
 
         <section id="discography">
-            <h2 style="margin-bottom: 40px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8;">Full Discography</h2>
+            <h2 style="margin-bottom: 40px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8;">Discography</h2>
             <div class="disco-grid">
                 <div class="glass-card disco-item reveal">
                     <img src="IMG_0081.PNG" alt="Faded 405">
@@ -173,6 +202,12 @@
                     <p>Single • 2025</p>
                 </div>
                 <div class="glass-card disco-item reveal">
+                    <img src="https://via.placeholder.com/400/111/fff?text=Two+of+Us" alt="Two of Us">
+                    <div style="position: absolute; top: 15px; right: 15px; background: var(--accent-main); font-size: 0.6rem; padding: 4px 10px; border-radius: 20px; font-weight: 900;">ESSENTIAL</div>
+                    <h3>Two of Us</h3>
+                    <p>Single • 2024</p>
+                </div>
+                <div class="glass-card disco-item reveal">
                     <img src="https://via.placeholder.com/400/111/fff?text=Ain't+New" alt="Ain't New">
                     <h3>Ain't New To Me</h3>
                     <p>Single • 2023</p>
@@ -181,11 +216,6 @@
                     <img src="https://via.placeholder.com/400/111/fff?text=Closer" alt="Closer">
                     <h3>Closer than cloer</h3>
                     <p>Single • 2023</p>
-                </div>
-                <div class="glass-card disco-item reveal">
-                    <img src="https://via.placeholder.com/400/111/fff?text=Fresh" alt="Fresh">
-                    <h3>Fresh</h3>
-                    <p>Single • 2022</p>
                 </div>
                 <div class="glass-card disco-item reveal">
                     <img src="https://via.placeholder.com/400/111/fff?text=Pakkage+Deal" alt="Pakkage Deal">
@@ -200,7 +230,7 @@
             </div>
         </section>
 
-        <section id="contact" class="glass-card contact-section reveal">
+        <section id="contact" class="glass-card reveal">
             <div class="contact-grid">
                 <div>
                     <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Contact</h2>
@@ -222,6 +252,7 @@
     </footer>
 
     <script>
+        // Intersection Observer for Reveal on Scroll
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('active');
@@ -230,11 +261,26 @@
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+        // Smooth Scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+                const target = document.querySelector(this.getAttribute('href'));
+                if(target) target.scrollIntoView({ behavior: 'smooth' });
             });
+        });
+
+        // Form Submission Feedback
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button');
+            btn.innerText = "Message Sent";
+            btn.style.background = "#28a745";
+            this.reset();
+            setTimeout(() => {
+                btn.innerText = "Send Message";
+                btn.style.background = "var(--accent-main)";
+            }, 4000);
         });
     </script>
 </body>
