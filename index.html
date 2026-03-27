@@ -130,7 +130,7 @@
                 <a href="#music">Music</a>
                 <a href="#about">About</a>
                 <a href="#discography">Discography</a>
-                <a href="https://music.apple.com/us/artist/doubleu/1586705800" target="_blank">Apple Music</a>
+                <a href="https://youtube.com/@doubleuotb" target="_blank">YouTube</a>
                 <a href="#contact">Contact</a>
             </div>
         </nav>
@@ -161,25 +161,13 @@
                         His sound is a collision of atmospheric synths and raw, percussive energy.
                     </p>
                     <p style="opacity: 0.6; line-height: 1.8;">
-                        Following the breakout success of <em>Real Life Trauma</em>, the 2026 LP <strong>Faded 405</strong> 
-                        marks a definitive shift. It is an immersive exploration of motion and memory, built for 
+                        From the foundational tones of 2021 to the 2026 LP <strong>Faded 405</strong>, 
+                        DoubleU marks a definitive shift in electronic storytelling. built for 
                         those who find clarity in the blur of the fast lane.
                     </p>
                 </div>
                 <div class="about-image" style="flex: 1; min-width: 300px; height: 500px; background: url('https://images.unsplash.com/photo-1518156677180-95a2893f3e9f?q=80&w=1000&auto=format&fit=crop') center/cover no-repeat; filter: grayscale(1) contrast(1.2);">
                 </div>
-            </div>
-        </section>
-
-        <section>
-            <h2 style="margin-bottom: 40px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8;">Popular Tracks</h2>
-            <div class="tracks-grid">
-                <div class="glass-card track-item reveal"><span class="track-num">01</span> Zero Sum</div>
-                <div class="glass-card track-item reveal"><span class="track-num">02</span> Shadow Boxer</div>
-                <div class="glass-card track-item reveal"><span class="track-num">03</span> Found you in the RainFall</div>
-                <div class="glass-card track-item reveal"><span class="track-num">04</span> Ain't New To Me</div>
-                <div class="glass-card track-item reveal"><span class="track-num">05</span> Closer than cloer</div>
-                <div class="glass-card track-item reveal"><span class="track-num">06</span> Two of Us</div>
             </div>
         </section>
 
@@ -196,17 +184,13 @@
                     <h3>Zero Sum</h3>
                     <p>Single • 2026</p>
                 </div>
+
                 <div class="glass-card disco-item reveal">
                     <img src="foundyouintherainfall.jpg" alt="Rainfall">
                     <h3>Found you in the RainFall</h3>
                     <p>Single • 2025</p>
                 </div>
-                <div class="glass-card disco-item reveal">
-                    <img src="twoofus.jpg" alt="Two of Us">
-                    <div style="position: absolute; top: 15px; right: 15px; background: var(--accent-main); font-size: 0.6rem; padding: 4px 10px; border-radius: 20px; font-weight: 900;">ESSENTIAL</div>
-                    <h3>Two of Us</h3>
-                    <p>Single • 2024</p>
-                </div>
+
                 <div class="glass-card disco-item reveal">
                     <img src="aintnewtome.jpg" alt="Ain't New">
                     <h3>Ain't New To Me</h3>
@@ -217,6 +201,7 @@
                     <h3>Closer than cloer</h3>
                     <p>Single • 2023</p>
                 </div>
+
                 <div class="glass-card disco-item reveal">
                     <img src="fresh.jpg" alt="Fresh">
                     <h3>Fresh</h3>
@@ -226,6 +211,13 @@
                     <img src="pakkagedeal.jpg" alt="Pakkage Deal">
                     <h3>Pakkage Deal</h3>
                     <p>Single • 2022</p>
+                </div>
+
+                <div class="glass-card disco-item reveal">
+                    <img src="twoofus.jpg" alt="Two of Us">
+                    <div style="position: absolute; top: 15px; right: 15px; background: var(--accent-main); font-size: 0.6rem; padding: 4px 10px; border-radius: 20px; font-weight: 900;">CLASSIC</div>
+                    <h3>Two of Us</h3>
+                    <p>Single • 2021</p>
                 </div>
                 <div class="glass-card disco-item reveal">
                     <img src="reallifetrauma.jpg" alt="Trauma">
@@ -241,6 +233,7 @@
                     <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Contact</h2>
                     <p style="opacity: 0.6; margin-bottom: 20px;">Inquiries regarding DoubleU.</p>
                     <p style="color: var(--accent-main); font-weight: bold;">mgmt@doubleumusic.com</p>
+                    <p style="margin-top: 20px; opacity: 0.5; font-size: 0.9rem;">Follow the visual journey: <br> <a href="https://youtube.com/@doubleuotb" target="_blank" style="text-decoration: underline;">youtube.com/@doubleuotb</a></p>
                 </div>
                 <form id="contact-form">
                     <input type="text" placeholder="Name" required>
@@ -257,7 +250,6 @@
     </footer>
 
     <script>
-        // Intersection Observer for Reveal on Scroll
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('active');
@@ -266,7 +258,6 @@
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // Smooth Scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -275,7 +266,6 @@
             });
         });
 
-        // Form Submission Feedback
         document.getElementById('contact-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const btn = this.querySelector('button');
